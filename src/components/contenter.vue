@@ -8,11 +8,12 @@
                 <p>华语 | 流行 | 摇滚 | 电子</p>
                 </div>
                 <div class="con_title_right">
+                    更多<img src="../assets/image/icon1.svg" alt="">
                 </div>
             </div>
-            
+            <el-divider><img src="../assets/image/amyimg/网易云音乐-copy.png" alt="">网易云音乐</el-divider>
         </div>
-        <div class="contenter_right">222</div>
+        <div class="contenter_right"></div>
     </div>
 </div>
 </template>
@@ -34,7 +35,7 @@ justify-content: space-between;
 .contenter_left {
 width: 70%;
 /* height: 100%; */
-background-color: #f00;
+/* background-color: #f00; */
 }
 .contenter_right {
 width: 30%;
