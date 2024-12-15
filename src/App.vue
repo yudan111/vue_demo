@@ -1,32 +1,38 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+  <Nav />
+  <NavT />
+  <Lunbo />
+  <Contenter />
+
+  <!-- <div>组件组成</div> -->
   </div>
 </template>
+<script>
+import nav from './components/nav.vue'
+import nav_t from './components/nav_t.vue'
+import lunbo from './components/lunbo.vue'
+import contenter from './components/contenter.vue';
+// import'./assets/style/reset.css'
 
+export default{
+  components: {
+    Nav: nav,
+    NavT: nav_t,
+     Lunbo: lunbo,
+    Contenter: contenter
+  }
+}
+</script>
 <style>
 #app {
+  /* width: 111%; */
+  margin: 0;
+  padding: 0;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
 }
 </style>
