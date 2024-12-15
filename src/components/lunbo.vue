@@ -1,6 +1,6 @@
 <template>
   <div class="carousel-container">
-    <el-carousel :interval="4000" type="card" height="200px"  indicator-position="inside">
+    <el-carousel :interval="4000" type="card" height="200px"  indicator-position="none">
       <el-carousel-item v-for="(item, index) in imageList" :key="index">
         <img :src="item" alt="轮播图片" style="width: 100%; height: 100%; object-fit: cover;">
       </el-carousel-item>
