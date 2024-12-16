@@ -4,7 +4,7 @@
   <NavT />
   <Lunbo />
   <Contenter />
-
+     <Footer />
   <!-- <div>组件组成</div> -->
   </div>
 </template>
@@ -12,7 +12,8 @@
 import nav from './components/nav.vue'
 import nav_t from './components/nav_t.vue'
 import lunbo from './components/lunbo.vue'
-import contenter from './components/contenter.vue';
+import contenter from './components/contenter.vue'
+import footer from './components/footer.vue'
 // import'./assets/style/reset.css'
 
 export default{
@@ -20,7 +21,8 @@ export default{
     Nav: nav,
     NavT: nav_t,
      Lunbo: lunbo,
-    Contenter: contenter
+    Contenter: contenter,
+    Footer: footer
   }
 }
 </script>
