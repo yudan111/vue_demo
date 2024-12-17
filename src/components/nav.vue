@@ -3,7 +3,7 @@
         <ul class="nav-links">
             <span><img src="../assets/image/amyimg/topbar.png" alt=""></span>
             <li> <span><router-link to="/">发现音乐</router-link></span></li>
-            <li><span><router-link to="/my-music">我的音乐</router-link></span></li>
+            <li><span><router-link to="/mymusic">我的音乐</router-link></span></li>
             <li> <span><router-link to="/follow">关注</router-link></span></li>
             <li> <span><router-link to="/store">商城</router-link></span></li>
             <li> <span><router-link to="/musician">音乐人</router-link></span></li>

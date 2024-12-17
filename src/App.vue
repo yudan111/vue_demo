@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-  <Nav />
+  <!-- <Nav />
   <NavT />
   <Lunbo />
-  <Contenter />
-
+  <Contenter /> -->
+  <div><router-view></router-view></div>
   <!-- <div>组件组成</div> -->
   </div>
 </template>

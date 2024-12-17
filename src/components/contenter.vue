@@ -14,7 +14,7 @@
                 <el-divider><img src="../assets/image/amyimg/网易云音乐-copy.png" alt="">网易云音乐</el-divider>
                 <div class="recommendation-list">
                     <div class="recommendation-item" v-for="item in musicItems" :key="item.id">
-                        <img :src="item.image"alt="音乐封面">
+                        <img :src="item.image" alt="音乐封面">
                         <div class="recommendation-details">
                             <p class="title">{{ item.title }}</p>
                             <p class="description">{{ item.description }}</p>
