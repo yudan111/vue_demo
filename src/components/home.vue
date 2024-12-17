@@ -4,6 +4,7 @@
   <NavT />
   <Lunbo />
   <Contenter />
+  <Foote />
   </div>
 </template>
 
@@ -12,7 +13,7 @@ import nav from './nav.vue'
 import nav_t from './nav_t.vue'
 import lunbo from './lunbo.vue'
 import contenter from './contenter.vue';
-
+import footer from './footer.vue';
 
 export default {
   // name: 'HomeView',
@@ -20,7 +21,8 @@ export default {
     Nav: nav,
     NavT: nav_t,
     Lunbo: lunbo,
-    Contenter: contenter
+    Contenter: contenter,
+    Footer: footer
   }
 
 }

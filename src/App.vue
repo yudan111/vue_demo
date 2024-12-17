@@ -5,7 +5,8 @@
   <Lunbo />
   <Contenter />
      <Footer />
-  <!-- <div>组件组成</div> -->
+   <div>组件组成</div> -->
+   <router-view />
   </div>
 </template>
 <script>
