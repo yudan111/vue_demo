@@ -16,7 +16,6 @@ import lunbo from './components/lunbo.vue'
 import contenter from './components/contenter.vue'
 import footer from './components/footer.vue'
 // import'./assets/style/reset.css'
-
 export default{
   components: {
     Nav: nav,

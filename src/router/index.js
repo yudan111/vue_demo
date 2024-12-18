@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import home from '../components/home.vue'
 import mymusic from '../components/mymusic.vue'
-import shopping from '../components/shopping.vue'
+import shopping from '../views/shopping.vue'
 
 Vue.use(VueRouter)
 

@@ -4,7 +4,7 @@
   <NavT />
   <Lunbo />
   <Contenter />
-  <Foote />
+  <Footer />
   </div>
 </template>
 
