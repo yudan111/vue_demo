@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import home from '../components/home.vue'
-
 import mymusic from '../views/mymusic.vue'
 import shopping from '../views/shopping.vue'
 import gd from '../views/gd.vue'
+import dlzc from '../views/dlzc.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -12,7 +13,7 @@ const routes = [
   { path: '/mymusic', component: mymusic },
   { path: '/store', component: shopping },
   { path: '/gd', component: gd },
-  { path: '/store', component: shopping }
+  { path: '/dlzc', component: dlzc }
   ]
 
 

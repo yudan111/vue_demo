@@ -10,7 +10,7 @@
             <li> <span><router-link to="/download-client">下载客户端</router-link></span></li>
             <li><span><input type="text" placeholder="音频/歌单/MV/歌词"></span></li>
             <li> <span><router-link to="/creator-center">创作者中心</router-link></span></li>
-            <li><span><router-link to="/login">登录</router-link></span></li>
+            <li><span><router-link to="/dlzc">登录</router-link></span></li>
         </ul>
     </div>
 </template>
