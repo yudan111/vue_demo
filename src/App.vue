@@ -1,30 +1,28 @@
 <template>
   <div id="app">
-  <!-- <Nav />
-  <NavT />
-  <Lunbo />
-  <Contenter />
-     <Footer />
-   <div>组件组成</div> -->
+
+  
    <router-view />
+   <bofan />
   </div>
 </template>
 <script>
-import nav from './components/nav.vue'
-import nav_t from './components/nav_t.vue'
-import lunbo from './components/lunbo.vue'
-import contenter from './components/contenter.vue'
-import footer from './components/footer.vue'
-// import'./assets/style/reset.css'
-
+// import bofan from './components/bofan.vue';
 export default{
-  components: {
-    Nav: nav,
-    NavT: nav_t,
-     Lunbo: lunbo,
-    Contenter: contenter,
-    Footer: footer
-  }
+  // components:{
+  //   Bofa:bofan,
+  // },
+  // watch: {
+    // '$route' (to, from) {
+      // 当路由变化时，强制更新组件，让样式能根据新路由正确渲染
+  //     this.$forceUpdate();
+  //   }
+  // }
+  
+  
+  
+  
+  
 }
 </script>
 <style>

@@ -1,0 +1,172 @@
+<template>
+  <div class="by">
+    <div>
+      <div class="dh">
+        <Nav />
+      </div>
+      <div class="con">
+        <div class="con1">
+          <el-tabs :tab-position="tabPosition" class="e-t">
+            <el-tab-pane label="我的歌手" class="gs">
+              <!-- 使用v-for指令循环渲染歌手列表项 -->
+               <div class="hz">
+              <div class="singer-item" v-for="(singer, index) in singerList" :key="index">
+                <img :src="singer.imagePath" alt="singer" class="singer-image" />
+                <p>{{ singer.name }}</p>
+              </div>
+            </div>
+            </el-tab-pane>
+            <el-tab-pane label="我的歌单" class="gs">
+              <div class="hz">
+              <div class="sg-item" v-for="(sg, index) in sgList" :key="index">
+                <router-link to="/gd"><img :src="sg.imagePath" alt="Sg" class="gd-image" /></router-link>
+                <p>{{ sg.name }}</p>
+              </div>
+            </div>
+            </el-tab-pane>
+          </el-tabs>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import nav from "@/components/nav.vue";
+import tp1 from "@/assets/image/amyimg/周杰伦.jpg";
+import tp2 from "@/assets/image/amyimg/林俊杰.jpg";
+import tp3 from "@/assets/image/amyimg/陈奕迅.jpg";
+import tp4 from "@/assets/image/amyimg/王菲.jpg";
+import tp5 from "@/assets/image/amyimg/邓紫棋.jpg";
+import tp6 from "@/assets/image/amyimg/孙燕姿.jpg";
+export default {
+  components: {
+    Nav: nav,
+  },
+  data() {
+    return {
+      singerList: [
+        {
+          name: "周杰伦",
+          imagePath: tp1,
+        },
+        {
+          name: "林俊杰",
+          imagePath: tp2,
+        },
+        {
+          name: "陈奕迅",
+          imagePath: tp3,
+        },
+        {
+          name: "王菲",
+          imagePath: tp4,
+        },
+        {
+          name: "邓紫棋",
+          imagePath: tp5,
+        },
+        {
+          name: "孙燕姿",
+          imagePath: tp6,
+        },
+      ],
+      sgList:[
+        {
+          name: "重返2010 | 从王菲开启2010经典之旅",
+          imagePath: tp4,
+        },
+        {
+          name: "邓紫棋",
+          imagePath: tp5,
+        },
+        {
+          name: "孙燕姿",
+          imagePath: tp6,
+        },
+      ],
+    };
+  },
+};
+</script>
+
+<style scoped>
+.by {
+  width: 100%;
+  height: 100vh;
+  border: 0;
+}
+
+
+
+.con1 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.img {
+  width: 30%;
+  margin-top: 5%;
+  margin-left: 5%;
+  border-radius: 10px;
+}
+
+.gs {
+  text-align: left;
+  margin-left: 0;
+  height: 100%;
+  background-color: #fffefef8;
+}
+
+.p {
+  display: inline-block;
+}
+
+.e-t {
+  height: 300px;
+  width: 50%;
+}
+
+.bt {
+  height: 3%;
+  width: 3%;
+}
+
+.singer-item {
+ 
+  margin: 10px;
+  text-align: center;
+
+
+}
+
+.singer-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 10%;
+  object-fit: cover;
+  transition: transform 0.7s ease; /* 适当延长过渡时间，让动画更明显，这行是修改的部分 */
+  transform-style: preserve-3d; /* 添加这行，启用3D空间，让元素可以在3D环境下变换 */
+}
+.singer-image:hover {
+  transform: rotate3d(0, 1, 0, 180deg); /* 修改为沿垂直方向（x轴）进行3D翻转180度 */
+}
+.gd-image{
+  width: 200px;
+  height: 200px;
+  border-radius: 10%;
+  object-fit: cover;
+}
+
+.hz{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+p{
+  width: 200px; /* 设定 p 标签宽度，根据实际情况调整 */
+  white-space: nowrap; /*  不允许文本换行 */
+  overflow: hidden; /*  超出部分隐藏 */
+  text-overflow: ellipsis; /*  溢出部分用省略号显示 */
+}
+</style>

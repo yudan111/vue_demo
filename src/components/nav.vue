@@ -2,8 +2,8 @@
     <div class="navbar">
         <ul class="nav-links">
             <span><img src="../assets/image/amyimg/topbar.png" alt=""></span>
-            <li> <span><router-link to="/">发现音乐</router-link></span></li>
-            <li><span><router-link to="/mymusic">我的音乐</router-link></span></li>
+            <li :class="{ 'active': $route.path === '/' }"> <span><router-link to="/">发现音乐</router-link></span></li>
+            <li :class="{ 'active': $route.path === '/mymusic' }"><span><router-link to="/mymusic">我的音乐</router-link></span></li>
             <li> <span><router-link to="/follow">关注</router-link></span></li>
             <li> <span><router-link to="/store">商城</router-link></span></li>
             <li> <span><router-link to="/musician">音乐人</router-link></span></li>
@@ -34,7 +34,6 @@ export default {
     padding: 0 ;
     /* margin: -5px; */
 }
-
 .nav-links {
     display: flex;
     align-items: center;
@@ -68,7 +67,7 @@ export default {
 }
 .nav-links li:hover a{
     color: #fff;
-    /* background-color: #000000; */
+    
 }
 .nav-links a {
     color: #b6b0b0;
@@ -79,5 +78,12 @@ export default {
     border:1px solid #b6b0b0;
     height: 30px;
     border-radius: 50px;
+}
+.active {
+  color: #fefcfc; /* 文字颜色变为白色 */
+  background-color: #000000; /* 背景色变为深灰色，可根据实际需求调整颜色值 */
+}
+.active a{
+    color: #fff;
 }
 </style>
