@@ -7,7 +7,6 @@
     </el-carousel>
   </div>
 </template>
-
 <script>
 import lu1 from '@/assets/lunbotu/lu1.jpg';
 import lu2 from '@/assets/lunbotu/lu2.jpg';
