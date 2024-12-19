@@ -2,14 +2,16 @@
   <div id="app">
    <router-view />
    <!-- <div class="player"> -->
-      <Play/>
+      <!-- <Play/> -->
    </div>
-  </div>
+  
 
 </template>
 <script>
 export default{
-  
+  // components: {
+  //   Play,
+  //   }
   
   
   
@@ -39,11 +41,11 @@ export default{
   z-index: 1000;   
 }
 </style>
-<script>
+<!-- <script>
 import Play from './components/play.vue'
   export default {
     components: {
       Play,
       }
       }
-</script>
+</script> -->

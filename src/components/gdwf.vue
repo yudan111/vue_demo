@@ -30,7 +30,7 @@
         </thead>
         <tbody>
           <tr v-for="(song, index) in songs" :key="index">
-            <td>{{ song.title }}</td>
+            <td><router-link to="yygd">{{ song.title }}</router-link></td>
             <td>{{ song.duration }}</td>
             <td>{{ song.singer }}</td>
             <td>{{ song.album }}</td>

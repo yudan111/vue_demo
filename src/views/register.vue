@@ -108,7 +108,7 @@ export default {
             });
             localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
             alert('注册成功');
-            // 在Vue 2中通过this.$router进行页面跳转
+            // 进行页面跳转
             this.$router.push('/login');
         }
     }
