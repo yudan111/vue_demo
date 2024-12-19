@@ -2,7 +2,7 @@
     <div>
          <Nav/>
      <Follow_comtenter/>
-        <!-- <Footer/> -->
+        <Footer/>
     </div>
 </template>
 
