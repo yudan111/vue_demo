@@ -1,10 +1,8 @@
 <template>
   <div id="app">
    <router-view />
-   <!-- <div class="player"> -->
       <Play/>
    </div>
-  </div>
 
 </template>
 <script>
@@ -40,10 +38,9 @@ export default{
 }
 </style>
 <script>
-import Play from './components/play.vue'
+// import Play from './components/play.vue'
   export default {
     components: {
-      Play,
       }
       }
 </script>
