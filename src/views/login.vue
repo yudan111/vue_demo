@@ -3,17 +3,17 @@
         <div id="con">
             <img id="tx" :src="avatarSrc" alt="用户头像">
             <div id="left">
-                <h2>登录用户</h2>  
+                <h2>登录用户</h2>
                 <div id="time">{{ currentTime }}</div>
             </div>
             <div id="right">
-                <form @submit.prevent="login">  <!-- 绑定登录提交事件 -->
+                <form @submit.prevent="login">
                     <input type="text" v-model="loginUsername" placeholder="用户名" required autocomplete="username"><br><br>
                     <input type="password" v-model="loginPassword" placeholder="密码" required autocomplete="current-password"><br><br>
                     <input id="tj" type="submit" value="登录">
                 </form>
                 <div class="login-link"><br>
-                    <router-link class="aa" to="/register">没有帐户？立即注册</router-link>  <!-- 链接指向注册页面，与注册时的对应 -->
+                    <router-link class="aa" to="/register">没有帐户？立即注册</router-link>
                 </div>
             </div>
         </div>
@@ -25,12 +25,12 @@ import avatarImg from '@/assets/image/amyimg/邓紫棋.jpg';
 import $ from 'jquery';
 
 export default {
-    name: 'Login',  // 修改组件名为Login
+    name: 'Login',
     data() {
         return {
             currentTime: '',
-            loginUsername: '',  // 登录用户名
-            loginPassword: '',  // 登录密码
+            loginUsername: '',
+            loginPassword: '',
             avatarSrc: avatarImg
         };
     },
@@ -68,7 +68,7 @@ export default {
                 left: '-=20px'
             }, 100).animate({
                 left: '+=40px'
-                }, 100).animate({
+            }, 100).animate({
                 left: '-=20px'
             }, 100);
         });
@@ -85,15 +85,17 @@ export default {
             // 从localStorage获取已注册用户信息
             const registeredUserStr = localStorage.getItem('registeredUsers');
             let registeredUsers = null;
-            if (registeredUserStrs) {
-                registeredUsers = JSON.parse(registeredUserStrs);
+            if (registeredUserStr) {
+                registeredUsers = JSON.parse(registeredUserStr);
             }
             // 验证用户名和密码是否匹配
-            if (registeredUsers && registeredUsers.username === this.loginUsername && registeredUsers.password === this.loginPassword) {
-                alert('登录成功');
-                // 这里可以添加登录成功后的页面跳转等后续操作，比如跳转到用户主页等
-                this.$router.push('/');
-                return;
+            if (registeredUsers) {
+                const isMatch = registeredUsers.some(user => user.username === this.loginUsername && user.password === this.loginPassword);
+                if (isMatch) {
+                    alert('登录成功');
+                    this.$router.push('/');
+                    return;
+                }
             }
             alert('用户名或密码错误，请重新输入');
         }
