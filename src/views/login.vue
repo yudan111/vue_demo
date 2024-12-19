@@ -92,6 +92,22 @@ export default {
             if (registeredUsers) {
                 const isMatch = registeredUsers.some(user => user.username === this.loginUsername && user.password === this.loginPassword);
                 if (isMatch) {
+                    // 以下是新增的存储用户信息到localStorage的代码部分
+                    const userInfo = {
+                        username: this.loginUsername
+                        // 这里可以按需添加更多要存储的用户信息字段，比如用户ID等
+                    };
+                    // 先从localStorage获取已有的存储用户信息的数组（如果不存在则初始化为空数组）
+                    const storedUserInfosStr = localStorage.getItem('storedUserInfos');
+                    let storedUserInfos = [];
+                    if (storedUserInfosStr) {
+                        storedUserInfos = JSON.parse(storedUserInfosStr);
+                    }
+                    // 将当前登录成功的用户信息添加到数组中
+                    storedUserInfos.push(userInfo);
+                    // 再将更新后的数组存回localStorage，记得转换为JSON字符串格式
+                    localStorage.setItem('storedUserInfos', JSON.stringify(storedUserInfos));
+
                     alert('登录成功');
                     this.$router.push('/');
                     return;
