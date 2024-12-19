@@ -44,6 +44,17 @@
 
     <!-- 动态列表 -->
     <div id="postList" class="post-list">
+      <div class="post-item">
+        <div class="post-header">
+          <img src="../assets/image/amyimg/周杰伦.jpg" class="avatar" />
+          <strong>longquan</strong>
+        </div>
+        <div class="post-content">我i喜欢下雨天，这样就看不到我流泪。</div>
+        <div class="post-image">
+          <img src="../assets/image/amyimg/bgA.png" alt="动态图片" />
+          <hr>
+        </div>
+      </div>
       <div v-for="(post, index) in posts" :key="index" class="post-item">
         <div class="post-header">
           <img :src="post.avatar" alt="头像" class="avatar" />
@@ -192,11 +203,13 @@ export default {
   padding: 30px;
   border-radius: 8px;
   width: 400px;
-  max-height: 80%; /* 限制弹窗最大高度 */
+  max-height: 80%;
+  /* 限制弹窗最大高度 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   position: relative;
-  overflow-y: auto; /* 启用滚动条 */
+  overflow-y: auto;
+  /* 启用滚动条 */
 }
 
 .modal-title {
@@ -215,8 +228,10 @@ export default {
 
 /* 表单部分滚动 */
 .modal-form {
-  max-height: 400px;  /* 限制表单最大高度 */
-  overflow-y: auto;   /* 启用垂直滚动条 */
+  max-height: 400px;
+  /* 限制表单最大高度 */
+  overflow-y: auto;
+  /* 启用垂直滚动条 */
   margin-bottom: 20px;
 }
 
@@ -289,6 +304,11 @@ export default {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+.smallimg img {
+  width: 5px;
+  height: 5px;
+}
+
 .post-header {
   display: flex;
   align-items: center;
@@ -310,7 +330,7 @@ export default {
 
 /* 图片样式 */
 .post-image img {
-  width: 60%;
+  width: 40%;
   height: auto;
   border-radius: 8px;
   margin-top: 10px;
