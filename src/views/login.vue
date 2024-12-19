@@ -3,17 +3,17 @@
         <div id="con">
             <img id="tx" :src="avatarSrc" alt="用户头像">
             <div id="left">
-                <h2>注册用户</h2>
+                <h2>登录用户</h2>  <!-- 将注册标题改为登录标题 -->
                 <div id="time">{{ currentTime }}</div>
             </div>
             <div id="right">
-                <form @submit.prevent="register">
-                    <input type="text" v-model="username" placeholder="用户名" required autocomplete="username"><br><br>
-                    <input type="password" v-model="password" placeholder="密码" required autocomplete="current-password"><br><br>
-                    <input id="tj" type="submit" value="注册">
+                <form @submit.prevent="login">  <!-- 绑定登录提交事件 -->
+                    <input type="text" v-model="loginUsername" placeholder="用户名" required autocomplete="username"><br><br>
+                    <input type="password" v-model="loginPassword" placeholder="密码" required autocomplete="current-password"><br><br>
+                    <input id="tj" type="submit" value="登录">
                 </form>
                 <div class="login-link"><br>
-                    <a href="login.html">已经有帐户？立即登录</a>
+                    <router-link class="aa" to="/register">没有帐户？立即注册</router-link>  <!-- 链接指向注册页面，与注册时的对应 -->
                 </div>
             </div>
         </div>
@@ -22,16 +22,15 @@
 
 <script>
 import avatarImg from '@/assets/image/amyimg/邓紫棋.jpg';
-
-// 确保正确引入jQuery，这里假设使用npm安装的方式，根据实际情况调整引入路径
 import $ from 'jquery';
+
 export default {
-    name: 'Register',
+    name: 'Login',  // 修改组件名为Login
     data() {
         return {
             currentTime: '',
-            username: '',
-            password: '',
+            loginUsername: '',  // 登录用户名
+            loginPassword: '',  // 登录密码
             avatarSrc: avatarImg
         };
     },
@@ -39,7 +38,7 @@ export default {
         this.updateTime();
         setInterval(this.updateTime, 1000);
 
-        // 绑定鼠标进入和离开input元素的事件
+        // 以下鼠标相关事件绑定与原注册功能类似，保持交互效果一致
         $(document).on('mouseenter', 'input', (e) => {
             $(e.currentTarget).css({
                 'transform': 'scale(1.1)',
@@ -52,14 +51,12 @@ export default {
             });
         });
 
-        // 绑定鼠标进入和离开a元素的事件
         $(document).on('mouseenter', 'a', (e) => {
             $(e.currentTarget).addClass("underline");
         }).on('mouseleave', 'a', (e) => {
             $(e.currentTarget).removeClass("underline");
         });
 
-        // 绑定头像点击事件
         $('#tx').click((e) => {
             $(e.currentTarget).animate({
                 top: '-=20px'
@@ -71,7 +68,7 @@ export default {
                 left: '-=20px'
             }, 100).animate({
                 left: '+=40px'
-            }, 100).animate({
+                }, 100).animate({
                 left: '-=20px'
             }, 100);
         });
@@ -84,19 +81,21 @@ export default {
             const seconds = now.getSeconds().toString().padStart(2, '0');
             this.currentTime = `${hours}:${minutes}:${seconds}`;
         },
-        register() {
-            // 简单验证，这里可以添加更严格的验证逻辑
-            if (!this.username ||!this.password) {
-                alert('用户名和密码不能为空');
+        login() {
+            // 从localStorage获取已注册用户信息
+            const registeredUserStr = localStorage.getItem('registeredUser');
+            let registeredUser = null;
+            if (registeredUserStr) {
+                registeredUser = JSON.parse(registeredUserStr);
+            }
+            // 验证用户名和密码是否匹配
+            if (registeredUser && registeredUser.username === this.loginUsername && registeredUser.password === this.loginPassword) {
+                alert('登录成功');
+                // 这里可以添加登录成功后的页面跳转等后续操作，比如跳转到用户主页等
+                this.$router.push('/');
                 return;
             }
-            // 将注册数据存储到localStorage
-            localStorage.setItem('registeredUser', JSON.stringify({
-                username: this.username,
-                password: this.password
-            }));
-            alert('注册成功');
-            // 可以在这里进行页面跳转等其他后续操作
+            alert('用户名或密码错误，请重新输入');
         }
     }
 };
@@ -109,6 +108,7 @@ body {
     padding: 0;
     height: 100%;
     width: 100%;
+    overflow: hidden;
 }
 
 .by {
@@ -122,11 +122,12 @@ body {
     align-items: center;
     min-height: 100vh;
     min-width: 100vw;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
+    z-index: -1;
 }
 
 #con {
@@ -139,6 +140,7 @@ body {
     border-radius: 10px;
     overflow: hidden;
     position: relative;
+    z-index: 1;
 }
 
 #left {
@@ -181,10 +183,11 @@ input {
     width: 100px;
     height: 100px;
     z-index: 6;
+    opacity: 0.8;
 }
 
 /* 去掉 a的下划线和改变颜色*/
-a {
+.aa {
     text-decoration: none;
     color: #0055ff;
 }

@@ -16,22 +16,22 @@
         musicUrl: require('@/assets/music/Study and Relax.mp3') 
       };
     },
-    // methods: {
-    //   playPauseMusic() {
-    //     const audio = this.$refs.audioPlayer;
-    //     if (audio.paused) {
-    //       audio.play();
-    //     } else {
-    //       audio.pause();
-    //     }
-    //   }
-    // }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
   };
   </script>
   
   <style scoped>
- .yc {
+ /* .yc {
   display: none;
   float: bottom;
-}
+} */
   </style>
