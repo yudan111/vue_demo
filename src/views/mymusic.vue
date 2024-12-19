@@ -11,7 +11,7 @@
               <!-- 使用v-for指令循环渲染歌手列表项 -->
                <div class="hz">
               <div class="singer-item" v-for="(singer, index) in singerList" :key="index">
-                <img :src="singer.imagePath" alt="singer" class="singer-image" />
+                <router-link to="/djgd"><img :src="singer.imagePath" alt="singer" class="singer-image" /></router-link>
                 <p>{{ singer.name }}</p>
               </div>
             </div>
@@ -39,6 +39,9 @@ import tp3 from "@/assets/image/amyimg/陈奕迅.jpg";
 import tp4 from "@/assets/image/amyimg/王菲.jpg";
 import tp5 from "@/assets/image/amyimg/邓紫棋.jpg";
 import tp6 from "@/assets/image/amyimg/孙燕姿.jpg";
+import tp7 from "@/assets/image/amyimg/张碧晨.jpg";
+import tp8 from "@/assets/image/amyimg/蔡健雅.jpg";
+import tp9 from "@/assets/image/amyimg/薛之谦.jpg";
 import footer from "@/components/footer.vue";
 export default {
   components: {
@@ -73,18 +76,18 @@ export default {
           imagePath: tp6,
         },
         {
-          name: "孙燕姿",
-          imagePath: tp6,
+          name: "张碧晨",
+          imagePath: tp7,
         },
 
         {
-          name: "孙燕姿",
-          imagePath: tp6,
+          name: "蔡健雅",
+          imagePath: tp8,
         },
 
         {
-          name: "孙燕姿",
-          imagePath: tp6,
+          name: "薛之谦",
+          imagePath: tp9,
         },
 
 
@@ -103,29 +106,29 @@ export default {
           imagePath: tp6,
         },
         {
-          name: "孙燕姿",
-          imagePath: tp6,
+          name: "张碧晨",
+          imagePath: tp7,
         },
 
         {
-          name: "孙燕姿",
-          imagePath: tp6,
+          name: "薛之谦",
+          imagePath: tp9,
         },
         {
-          name: "孙燕姿",
-          imagePath: tp6,
+          name: "陈奕迅",
+          imagePath: tp3,
         },
         {
-          name: "孙燕姿",
-          imagePath: tp6,
+          name: "林俊杰",
+          imagePath: tp2,
         },
         {
-          name: "孙燕姿",
-          imagePath: tp6,
+          name: "周杰伦",
+          imagePath: tp1,
         },
         {
-          name: "孙燕姿",
-          imagePath: tp6,
+          name: "蔡健雅",
+          imagePath: tp8,
         },
 
       ],
@@ -190,7 +193,7 @@ export default {
   height: 200px;
   border-radius: 10%;
   object-fit: cover;
-  transition: transform 0.7s ease; /* 适当延长过渡时间，让动画更明显，这行是修改的部分 */
+  transition: transform 0.7s ease; /* 适当延长过渡时间，让动画更明显， */
   transform-style: preserve-3d; /* 添加这行，启用3D空间，让元素可以在3D环境下变换 */
 }
 .singer-image:hover {

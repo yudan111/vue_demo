@@ -84,27 +84,29 @@ export default {
             this.currentTime = `${hours}:${minutes}:${seconds}`;
         },
         register() {
-            // 先从localStorage获取已注册用户信息（如果有的话）
-            const registeredUserStr = localStorage.getItem('registeredUser');
-            let registeredUser = null;
+            // 获取已注册用户信息（如果有的话），并解析为数组格式
+            const registeredUserStr = localStorage.getItem('registeredUsers');
+            let registeredUsers = [];
             if (registeredUserStr) {
-                registeredUser = JSON.parse(registeredUserStr);
+                registeredUsers = JSON.parse(registeredUserStr);
+            }
+            // 验证用户名是否已存在时，遍历数组进行判断
+            const isUsernameExist = registeredUsers.some(user => user.username === this.username);
+            if (isUsernameExist) {
+                alert('注册失败，该用户名已被注册');
+                return;
             }
             // 简单验证，验证用户名和密码是否为空
             if (!this.username ||!this.password) {
                 alert('用户名和密码不能为空');
                 return;
             }
-            // 判断当前提交注册的用户名是否已存在
-            if (registeredUser && registeredUser.username === this.username) {
-                alert('注册失败，该用户名已被注册');
-                return;
-            }
-            // 将注册数据存储到localStorage
-            localStorage.setItem('registeredUser', JSON.stringify({
+            // 注册成功后，将新用户信息添加到数组中再存储回localStorage
+            registeredUsers.push({
                 username: this.username,
                 password: this.password
-            }));
+            });
+            localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
             alert('注册成功');
             // 在Vue 2中通过this.$router进行页面跳转
             this.$router.push('/login');

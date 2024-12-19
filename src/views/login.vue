@@ -3,7 +3,7 @@
         <div id="con">
             <img id="tx" :src="avatarSrc" alt="用户头像">
             <div id="left">
-                <h2>登录用户</h2>  <!-- 将注册标题改为登录标题 -->
+                <h2>登录用户</h2>  
                 <div id="time">{{ currentTime }}</div>
             </div>
             <div id="right">
@@ -83,13 +83,13 @@ export default {
         },
         login() {
             // 从localStorage获取已注册用户信息
-            const registeredUserStr = localStorage.getItem('registeredUser');
-            let registeredUser = null;
-            if (registeredUserStr) {
-                registeredUser = JSON.parse(registeredUserStr);
+            const registeredUserStr = localStorage.getItem('registeredUsers');
+            let registeredUsers = null;
+            if (registeredUserStrs) {
+                registeredUsers = JSON.parse(registeredUserStrs);
             }
             // 验证用户名和密码是否匹配
-            if (registeredUser && registeredUser.username === this.loginUsername && registeredUser.password === this.loginPassword) {
+            if (registeredUsers && registeredUsers.username === this.loginUsername && registeredUsers.password === this.loginPassword) {
                 alert('登录成功');
                 // 这里可以添加登录成功后的页面跳转等后续操作，比如跳转到用户主页等
                 this.$router.push('/');

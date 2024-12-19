@@ -15,7 +15,7 @@
                 <el-divider><img src="../assets/image/amyimg/网易云音乐-copy.png" alt="">网易云音乐</el-divider>
                 <div class="recommendation-list">
                     <div class="recommendation-item" v-for="item in musicItems" :key="item.id">
-                        <img :src="item.image" alt="音乐封面">
+                        <router-link to="djgd"><img :src="item.image" alt="音乐封面"></router-link>
                         <div class="recommendation-details">
                             <p class="title">{{ item.title }}</p>
                             <p class="description">{{ item.description }}</p>
@@ -35,7 +35,7 @@
                 <el-divider><img src="../assets/image/amyimg/网易云音乐-copy.png" alt="">网易云音乐</el-divider>
                 <div class="recommendation-list">
                     <div class="recommendation-item" v-for="item in musicItems.slice(4)" :key="item.id">
-                        <img :src="item.image" alt="音乐封面">
+                        <router-link to="/djgd"><img :src="item.image" alt="音乐封面"></router-link>
                         <div class="recommendation-details">
                             <p class="title">{{ item.title }}</p>
                             <p class="description" font-size:10px>{{ item.description }}</p>
@@ -326,7 +326,7 @@ export default {
                 {
                     name: '张惠妹aMEI',
                     description: '台湾歌手张惠妹',
-                    image: yu9,// 这里假设一个图片链接，实际需替换
+                    image: yu9,
                 },
                 {
                     name: '吴莫愁Momo',

@@ -1,97 +1,85 @@
 <template>
-    <div class="image-wall-container">
-      <div class="image-slider" :style="{ transform: `translateX(${currentTranslateX}px)` }">
-        <img v-for="(image, index) in extendedImages" :key="index" :src="image" alt="图片" class="slider-image">
-        
-      </div>
-      <div class="image-slider" :style="{ transform: `translateX(${currentTranslateX}px)` }">
-        <img v-for="(image, index) in extendedImages" :key="index" :src="image" alt="图片" class="slider-image">
-        
-      </div>
-
+  <div class="photo-wall-container">
+    <div class="photo-wall" ref="photoWall">
+      <img v-for="(photo, index) in visiblePhotos" :key="index" :src="photo.src" class="photo-item">
     </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        images: [
-          require('@/assets/image/amyimg/tp1.webp'),
-          require('@/assets/image/amyimg/tp1.webp'),
-          require('@/assets/image/amyimg/tp1.webp'),
-          require('@/assets/image/amyimg/tp1.webp'),
-          require('@/assets/image/amyimg/tp1.webp'),
-          require('@/assets/image/amyimg/tp1.webp'),
-          require('@/assets/image/amyimg/tp1.webp'),
-          require('@/assets/image/amyimg/tp1.webp'),
-          require('@/assets/image/amyimg/tp1.webp'),
-          require('@/assets/image/amyimg/tp1.webp'),
-          require('@/assets/image/amyimg/tp1.webp'),
+  </div>
+</template>
 
-
-          // 添加更多图片路径...
-        ],
-        currentTranslateX: 0,
-        imageWidth: 200, // 每张图片宽度，根据实际情况调整
-        containerWidth: 600, // 容器宽度，与样式中的宽度保持一致
-        intervalId: null
-      };
-    },
-    computed: {
-      // 创建一个扩展的图片数组，包含原始图片两次以实现循环效果
-      extendedImages() {
-        return [...this.images, ...this.images];
+<script>
+export default {
+  data() {
+    return {
+      allPhotos: [
+        { src: require('@/assets/image/amyimg/tp1.webp') },
+        { src: require('@/assets/image/amyimg/tp2.webp') },
+        { src: require('@/assets/image/amyimg/tp3.webp') },
+        { src: require('@/assets/image/amyimg/tp4.webp') },
+        { src: require('@/assets/image/amyimg/tp5.webp') },
+        { src: require('@/assets/image/amyimg/tp6.webp') },
+        { src: require('@/assets/image/amyimg/tp7.webp') },
+        { src: require('@/assets/image/amyimg/tp8.webp') },
+        { src: require('@/assets/image/amyimg/tp9.webp') },
+        // 根据实际情况添加更多照片路径
+      ],
+      visiblePhotos: [],
+      step: 1,  // 每次滚动的像素步长，可按需调整
+      containerWidth: 0,
+      photoWidth: 0
+    };
+  },
+  mounted() {
+    this.initPhotos();
+    this.startAutoScroll();
+  },
+  beforeDestroy() {
+    this.stopAutoScroll();
+  },
+  methods: {
+    initPhotos() {
+      // 初始化时先把所有照片添加到可见照片数组
+      this.visiblePhotos = [...this.allPhotos];
+      const photoWall = this.$refs.photoWall;
+      const firstPhoto = photoWall.querySelector('.photo-item');
+      if (firstPhoto) {
+        this.photoWidth = firstPhoto.offsetWidth;
+        this.containerWidth = photoWall.offsetWidth;
       }
     },
-    mounted() {
-      this.startAutoScroll();
+    startAutoScroll() {
+      const photoWall = this.$refs.photoWall;
+      setInterval(() => {
+        photoWall.scrollLeft += this.step;
+        if (photoWall.scrollLeft >= this.visiblePhotos.length * this.photoWidth - this.containerWidth) {
+          // 当滚动到快超出范围时
+          const lastPhoto = this.visiblePhotos.pop();
+          this.visiblePhotos.unshift(lastPhoto);
+          photoWall.scrollLeft = 0;
+        }
+      }, 600);  // 滚动间隔时间，可调整
     },
-    beforeDestroy() {
-      this.stopAutoScroll();
-    },
-    methods: {
-      startAutoScroll() {
-        this.intervalId = setInterval(() => {
-          const totalImagesWidth = this.imageWidth * this.extendedImages.length;
-          this.currentTranslateX -= 10; // 向左移动
-          
-          // 如果当前位移使得第一张图片完全离开视窗，则进行重置操作
-          if (Math.abs(this.currentTranslateX) >= this.imageWidth * this.images.length) {
-            this.currentTranslateX = -this.imageWidth * this.images.length + this.imageWidth;
-            // 立即应用新的位移值，不触发过渡动画
-            this.$nextTick(() => {
-              this.currentTranslateX = 0;
-            });
-          }
-  
-          // 当滚动到最后一张图片开始部分时，悄悄地将所有图片复制到前面
-          if (-this.currentTranslateX >= totalImagesWidth - this.containerWidth) {
-            this.currentTranslateX += this.imageWidth * this.images.length;
-          }
-        }, 50); // 每50毫秒移动一次，控制滚动频率
-      },
-      stopAutoScroll() {
-        clearInterval(this.intervalId);
-      }
+    stopAutoScroll() {
+      clearInterval(this.timer);
     }
-  };
-  </script>
-  
-  <style scoped>
-  .image-wall-container {
-    width: 600px; /* 根据实际需求调整 */
-    overflow: hidden;
-    margin: 0 auto;
   }
-  .image-slider {
-    display: flex;
-    transition: transform 0.3s ease-in-out; /* 动画过渡效果 */
-  }
-  .slider-image {
-    width: 200px; /* 图片宽度 */
-    height: auto;
-    /* margin-right: 10px; */
-    margin: 20px;
-  }
-  </style>
+};
+</script>
+
+<style scoped>
+.photo-wall-container {
+  width: 100%;  
+  overflow: hidden;
+  margin: 0 auto;
+}
+.photo-wall {
+  display: flex;
+  width: max-content;
+}
+.photo-item {
+  width: 200px;  
+  height: 200px; 
+  margin: 20px;
+  border-radius: 50%;  
+  overflow: hidden;  
+}
+</style>
