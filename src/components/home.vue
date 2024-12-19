@@ -15,7 +15,6 @@ import nav_t from './nav_t.vue'
 import lunbo from './lunbo.vue'
 import contenter from './contenter.vue';
 import footer from './footer.vue';
-import bofan from './bofan.vue';
 
 export default {
     name: 'home',
@@ -25,7 +24,7 @@ export default {
     Lunbo: lunbo,
     Contenter: contenter,
     Footer: footer,
-    // Bofan: bofan,
+    
   }
 
 }

@@ -28,6 +28,7 @@
         </div>
       </div>
     </div>
+   
   </div>
 </template>
 <script>
@@ -38,9 +39,11 @@ import tp3 from "@/assets/image/amyimg/陈奕迅.jpg";
 import tp4 from "@/assets/image/amyimg/王菲.jpg";
 import tp5 from "@/assets/image/amyimg/邓紫棋.jpg";
 import tp6 from "@/assets/image/amyimg/孙燕姿.jpg";
+import footer from "@/components/footer.vue";
 export default {
   components: {
     Nav: nav,
+    Footer: footer,
   },
   data() {
     return {
@@ -69,6 +72,22 @@ export default {
           name: "孙燕姿",
           imagePath: tp6,
         },
+        {
+          name: "孙燕姿",
+          imagePath: tp6,
+        },
+
+        {
+          name: "孙燕姿",
+          imagePath: tp6,
+        },
+
+        {
+          name: "孙燕姿",
+          imagePath: tp6,
+        },
+
+
       ],
       sgList:[
         {
@@ -83,6 +102,32 @@ export default {
           name: "孙燕姿",
           imagePath: tp6,
         },
+        {
+          name: "孙燕姿",
+          imagePath: tp6,
+        },
+
+        {
+          name: "孙燕姿",
+          imagePath: tp6,
+        },
+        {
+          name: "孙燕姿",
+          imagePath: tp6,
+        },
+        {
+          name: "孙燕姿",
+          imagePath: tp6,
+        },
+        {
+          name: "孙燕姿",
+          imagePath: tp6,
+        },
+        {
+          name: "孙燕姿",
+          imagePath: tp6,
+        },
+
       ],
     };
   },

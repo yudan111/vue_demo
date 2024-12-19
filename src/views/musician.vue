@@ -8,16 +8,19 @@
       <div class="tp">
           <Tp />
       </div>
+      
     </div>
 </template>
   
 <script>
   import nav from '@/components/nav.vue'
   import tp from '@/components/tp.vue'
+ 
   export default {
       components: {
           Nav:nav,
-          Tp:tp
+          Tp:tp,
+          
       }
   }
 </script>

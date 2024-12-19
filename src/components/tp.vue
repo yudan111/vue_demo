@@ -2,7 +2,13 @@
     <div class="image-wall-container">
       <div class="image-slider" :style="{ transform: `translateX(${currentTranslateX}px)` }">
         <img v-for="(image, index) in extendedImages" :key="index" :src="image" alt="图片" class="slider-image">
+        
       </div>
+      <div class="image-slider" :style="{ transform: `translateX(${currentTranslateX}px)` }">
+        <img v-for="(image, index) in extendedImages" :key="index" :src="image" alt="图片" class="slider-image">
+        
+      </div>
+
     </div>
   </template>
   
@@ -18,7 +24,12 @@
           require('@/assets/image/amyimg/tp1.webp'),
           require('@/assets/image/amyimg/tp1.webp'),
           require('@/assets/image/amyimg/tp1.webp'),
-          
+          require('@/assets/image/amyimg/tp1.webp'),
+          require('@/assets/image/amyimg/tp1.webp'),
+          require('@/assets/image/amyimg/tp1.webp'),
+          require('@/assets/image/amyimg/tp1.webp'),
+
+
           // 添加更多图片路径...
         ],
         currentTranslateX: 0,
@@ -80,6 +91,7 @@
   .slider-image {
     width: 200px; /* 图片宽度 */
     height: auto;
-    margin-right: 10px;
+    /* margin-right: 10px; */
+    margin: 20px;
   }
   </style>
