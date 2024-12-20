@@ -4,7 +4,6 @@
   <NavT />
   <Lunbo />
   <Contenter />
-  <!-- <Bofan /> -->
   <Footer />
   </div>
 </template>

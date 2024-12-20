@@ -4,9 +4,9 @@
             <span><img src="../assets/image/amyimg/topbar.png" alt=""></span>
             <li :class="{ 'active': $route.path === '/' }"><span><router-link to="/">发现音乐</router-link></span></li>
             <li :class="{ 'active': $route.path === '/mymusic' }"><span><router-link to="/mymusic">我的音乐</router-link></span></li>
-            <li><span><router-link to="/follow">关注</router-link></span></li>
-            <li><span><router-link to="/store">商城</router-link></span></li>
-            <li><span><router-link to="/musician">音乐人</router-link></span></li>
+            <li :class="{ 'active': $route.path === '/follow' }"><span><router-link to="/follow">关注</router-link></span></li>
+            <li :class="{ 'active': $route.path === '/store' }"><span><router-link to="/store">商城</router-link></span></li>
+            <li :class="{ 'active': $route.path === '/musician' }"><span><router-link to="/musician">音乐人</router-link></span></li>
 
             <!-- 下载客户端 下拉菜单 -->
             <li class="dropdown">
@@ -47,7 +47,7 @@ export default {
         if (storedUserInfosStr) {
             const storedUserInfos = JSON.parse(storedUserInfosStr);
             if (storedUserInfos.length > 0) {
-                // 这里简单取第一个用户信息作为示例，实际可能需要根据业务逻辑判断取哪个用户信息
+                // 取第一个用户信息
                 this.username = storedUserInfos[0].username;
                 // 直接使用导入的头像路径赋值给avatarSrc，使其能正确显示头像
                 this.avatarSrc = avatarImg;
