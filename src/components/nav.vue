@@ -57,7 +57,6 @@ export default {
     }
 };
 </script>
-
 <style scoped>
 .navbar {
     font-size: 90%;
@@ -123,15 +122,11 @@ export default {
 }
 
 /* 下拉菜单样式 */
-.nav-links.dropdown {
+.nav-links .dropdown {
     position: relative; /* Ensures dropdown aligns with other menu items */
 }
 
-.dropdown span {
-    color: #b30000;
-}
-
-.nav-links.dropdown-menu {
+.nav-links .dropdown-menu {
     display: none;
     position: absolute;
     top: 70px; /* Ensures the menu appears directly below the navbar */
@@ -144,22 +139,22 @@ export default {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.nav-links.dropdown-menu li {
+.nav-links .dropdown-menu li {
     padding: 10px 15px;
     height: 40px;
 }
 
-.nav-links.dropdown-menu li:hover {
+.nav-links .dropdown-menu li:hover {
     background-color: #333;
 }
 
-.nav-links.dropdown-menu a {
+.nav-links .dropdown-menu a {
     color: #b6b0b0;
     text-decoration: none;
 }
 
 /* Show dropdown menu on hover */
-.nav-links.dropdown:hover.dropdown-menu {
+.nav-links .dropdown:hover .dropdown-menu {
     display: block;
 }
 </style>

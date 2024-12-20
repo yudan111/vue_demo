@@ -6,12 +6,6 @@
         <h4>
           民谣小酒馆：民谣太穷，一把吉他走遍天下
         </h4>
-        <div>
-          <button><img src="../assets/image/amyimg/播放.svg" alt=""></button>
-          <button><img src="../assets/image/amyimg/收藏.svg" alt=""></button>
-          <button><img src="../assets/image/amyimg/下载.svg" alt=""></button>
-          <button><img src="../assets/image/amyimg/更多.svg" alt=""></button>
-        </div>
       </div>
     </div>
     <div class="playlist">
@@ -28,10 +22,10 @@
           <span class="song-artist">{{ song.artist }}</span>
 
           <!-- 播放按钮 -->
-          <button @click="playSong(song)" class="play-btn">播放</button>
+          <button ><a href="../音乐播放器/index.html"><img src="../assets/image/amyimg/播放.svg" alt=""></a></button>
 
           <!-- 删除按钮 -->
-          <button @click="deleteSong(index)" class="delete-btn">删除</button>
+          <button @click="deleteSong(index)" class="delete-btn"><img src="../assets/image/amyimg/删除.svg" alt=""></button>
         </li>
       </ul>
     </div>
@@ -40,25 +34,36 @@
 </template>
 
 <script>
+import w1 from '../assets/image/amyimg/热门推荐1.jpg';
+import w2 from '../assets/image/amyimg/热门推荐2.jpg';
+import w3 from '../assets/image/amyimg/热门推荐3.jpg';
+import w4 from '../assets/image/amyimg/热门推荐4.jpg';
+import w5 from '../assets/image/amyimg/热门推荐5.jpg';
+import w6 from '../assets/image/amyimg/热门推荐6.jpg';
+import w7 from '../assets/image/amyimg/热门推荐7.jpg';
+import w8 from '../assets/image/amyimg/热门推荐8.jpg';
 export default {
   data() {
     return {
-      playlistName: '我的收藏',
+      playlistName: '民谣',
       songs: [
-        { title: '平凡之路', artist: '朴树', coverImage: 'https://via.placeholder.com/50' },
-        { title: '岁月神偷', artist: '金玟岐', coverImage: 'https://via.placeholder.com/50' },
-        { title: '成全', artist: '林忆莲', coverImage: 'https://via.placeholder.com/50' },
-        { title: '突然好想你', artist: '五月天', coverImage: 'https://via.placeholder.com/50' },
-        { title: '演员', artist: '薛之谦', coverImage: 'https://via.placeholder.com/50' },
-        { title: '平凡之路', artist: '朴树', coverImage: 'https://via.placeholder.com/50' },
-        { title: '岁月神偷', artist: '金玟岐', coverImage: 'https://via.placeholder.com/50' },
-        { title: '成全', artist: '林忆莲', coverImage: 'https://via.placeholder.com/50' },
-        { title: '突然好想你', artist: '五月天', coverImage: 'https://via.placeholder.com/50' },
-        { title: '演员', artist: '薛之谦', coverImage: 'https://via.placeholder.com/50' }
+        { title: '平凡之路', artist: '朴树', coverImage: w1 },
+        { title: '岁月神偷', artist: '金玟岐', coverImage: w2},
+        { title: '成全', artist: '林忆莲', coverImage:w3 },
+        { title: '突然好想你', artist: '五月天', coverImage: w4 },
+        { title: '演员', artist: '薛之谦', coverImage: w5 },
+        { title: '平凡之路', artist: '朴树', coverImage: w6 },
+        { title: '岁月神偷', artist: '金玟岐', coverImage: w7 },
+        { title: '成全', artist: '林忆莲', coverImage: w8 },
+        { title: '突然好想你', artist: '五月天', coverImage: w1 },
+        { title: '演员', artist: '薛之谦', coverImage: w3}
       ]
     };
   },
   methods: {
+    goToMusicPlayer() {
+        window.location.href = '../src/音乐播放器/index.html';
+    },
     playSong(song) {
       console.log(`播放歌曲: ${song.title} - ${song.artist}`);
       // 这里可以添加播放歌曲的逻辑
@@ -75,7 +80,7 @@ export default {
 .playlist {
   font-family: 'Arial', sans-serif;
   padding: 20px;
-  /* max-width: 600px; */
+  max-width: 600px;
   margin: 0 auto;
   /* background-color: #f9f9f9; */
   border-radius: 8px;
@@ -119,7 +124,12 @@ h1 {
   padding: 0;
   margin: 0;
 }
-
+.song-list li:nth-child(2n) {
+  background-color: #f5f4f4;
+  }
+  .song-list :nth-child(2n+1) {
+  background-color: #ffffff;
+}
 .song-item {
   display: flex;
   align-items: center;
@@ -127,7 +137,7 @@ h1 {
   /* border-bottom: 1px solid #e0e0e0; */
 }
 .song-item:hover {
-  background-color: #a7a5a5;
+  background-color: #d2cbcb;
 }
 
 .song-item:last-child {

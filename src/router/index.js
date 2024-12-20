@@ -12,7 +12,7 @@ import creatorcenter from '../views/creatorcenter.vue'
 import musician from '../views/musician.vue'
 import djgd from '@/components/djgd.vue'
 import yygd from '@/components/yygd.vue'
- 
+
 
 Vue.use(VueRouter)
 
@@ -28,7 +28,8 @@ const routes = [
   { path: '/creatorcenter', component: creatorcenter },
   { path: '/musician', component: musician },
   { path: '/djgd', component: djgd },
-  { path: '/yygd', component: yygd }
+  { path: '/yygd', component: yygd },
+  // { path: '/yybfq', component: yybfq },
   ]
 
 
