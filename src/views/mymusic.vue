@@ -193,11 +193,11 @@ export default {
   height: 200px;
   border-radius: 10%;
   object-fit: cover;
-  transition: transform 0.7s ease; /* 适当延长过渡时间，让动画更明显， */
-  transform-style: preserve-3d; /* 添加这行，启用3D空间，让元素可以在3D环境下变换 */
+  transition: transform 0.7s ease;
+  transform-style: preserve-3d; 
 }
 .singer-image:hover {
-  transform: rotate3d(0, 1, 0, 180deg); /* 修改为沿垂直方向（x轴）进行3D翻转180度 */
+  transform: rotate3d(0, 1, 0, 180deg); 
 }
 .gd-image{
   width: 200px;
@@ -212,9 +212,9 @@ export default {
   justify-content: space-between;
 }
 p{
-  width: 200px; /* 设定 p 标签宽度，根据实际情况调整 */
-  white-space: nowrap; /*  不允许文本换行 */
-  overflow: hidden; /*  超出部分隐藏 */
-  text-overflow: ellipsis; /*  溢出部分用省略号显示 */
+  width: 200px; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
 }
 </style>

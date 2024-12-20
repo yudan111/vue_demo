@@ -1,6 +1,5 @@
 <template>
   <div class="song-list">
-    <!-- 头部区域 -->
     <div class="header">
       <h1>重返2010|从王菲开启2010经典之旅</h1>
       <div class="hz">

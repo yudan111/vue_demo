@@ -20,10 +20,9 @@ export default {
         { src: require('@/assets/image/amyimg/tp7.webp') },
         { src: require('@/assets/image/amyimg/tp8.webp') },
         { src: require('@/assets/image/amyimg/tp9.webp') },
-        // 根据实际情况添加更多照片路径
       ],
       visiblePhotos: [],
-      step: 1,  // 每次滚动的像素步长，可按需调整
+      step: 1,  // 每次滚动的像素步长
       containerWidth: 0,
       photoWidth: 0
     };
@@ -56,7 +55,7 @@ export default {
           this.visiblePhotos.unshift(lastPhoto);
           photoWall.scrollLeft = 0;
         }
-      }, 600);  // 滚动间隔时间，可调整
+      }, 600);  // 滚动间隔时间
     },
     stopAutoScroll() {
       clearInterval(this.timer);

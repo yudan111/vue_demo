@@ -176,8 +176,7 @@ import { BootstrapVue } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 // 引入BootstrapVue样式
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import bofan from './components/bofan.vue';
-Vue.component('bofan', bofan);
+
 Vue.use(BootstrapVue)
 
 new Vue({
