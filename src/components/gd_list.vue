@@ -22,7 +22,7 @@
           <span class="song-artist">{{ song.artist }}</span>
 
           <!-- 播放按钮 -->
-          <button ><a href="../音乐播放器/index.html"><img src="../assets/image/amyimg/播放.svg" alt=""></a></button>
+          <button ><router-link to="/yygd"><img src="../assets/image/amyimg/播放.svg" alt=""></router-link></button>
 
           <!-- 删除按钮 -->
           <button @click="deleteSong(index)" class="delete-btn"><img src="../assets/image/amyimg/删除.svg" alt=""></button>

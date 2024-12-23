@@ -85,7 +85,7 @@
                         <h3>{{ singer.name }}</h3>
                         <p>{{ singer.description }}</p>
                     </div>
-                    <button>申请成为网易音乐人</button>
+                    <button><router-link to="/musician">申请成为网易音乐人</router-link></button>
                 </div>
             </div>
         </div>

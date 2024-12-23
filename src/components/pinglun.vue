@@ -47,7 +47,7 @@
       <div class="post-item">
         <div class="post-header">
           <img src="../assets/image/amyimg/周杰伦.jpg" class="avatar" />
-          <strong>longquan</strong>
+          <strong>黄思哲爱赖志权</strong>
         </div>
         <div class="post-content">我i喜欢下雨天，这样就看不到我流泪。</div>
         <div class="post-image">
