@@ -2,11 +2,11 @@
     <div class="navbar">
         <ul class="nav-links">
             <span><img src="../assets/image/amyimg/topbar.png" alt=""></span>
-            <li :class="{ 'active': $route.path === '/' }"><span><router-link to="/">发现音乐</router-link></span></li>
-            <li :class="{ 'active': $route.path === '/mymusic' }"><span><router-link to="/mymusic">我的音乐</router-link></span></li>
-            <li :class="{ 'active': $route.path === '/follow' }"><span><router-link to="/follow">关注</router-link></span></li>
-            <li :class="{ 'active': $route.path === '/store' }"><span><router-link to="/store">商城</router-link></span></li>
-            <li :class="{ 'active': $route.path === '/musician' }"><span><router-link to="/musician">音乐人</router-link></span></li>
+            <li :class="{ 'active': isActive('/') }"><span><router-link to="/">发现音乐</router-link></span></li>
+            <li :class="{ 'active': isActive('/mymusic') }"><span><router-link to="/mymusic">我的音乐</router-link></span></li>
+            <li :class="{ 'active': isActive('/follow') }"><span><router-link to="/follow">关注</router-link></span></li>
+            <li :class="{ 'active': isActive('/store') }"><span><router-link to="/store">商城</router-link></span></li>
+            <li :class="{ 'active': isActive('/musician') }"><span><router-link to="/musician">音乐人</router-link></span></li>
 
             <!-- 下载客户端 下拉菜单 -->
             <li class="dropdown">
@@ -19,13 +19,16 @@
             </li>
 
             <li><span><input type="text" placeholder="音频/歌单/MV/歌词"></span></li>
-            <li><span><router-link to="/creatorcenter">创作者中心</router-link></span></li>
+            <li v-if="isAdmin" :class="{ 'active': isActive('/admin') }"><span><router-link to="/admin">管理中心</router-link></span></li>
             <li v-if="!isLoggedIn"><span><router-link to="/login">登录</router-link></span></li>
-            <li v-else>
+            <li v-else class="user-dropdown" @mouseenter="showDropdown = true" @mouseleave="hideDropdown">
                 <span>
                     <img :src="avatarSrc" alt="用户头像" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 5px;">
                     <span>账号：{{ username }}</span>
                 </span>
+                <ul class="user-dropdown-menu" @mouseenter.stop="stopHideDropdown" @mouseleave="hideDropdown" v-if="showDropdown">
+                    <li><a href="#" @click.prevent="logout">退出登录</a></li>
+                </ul>
             </li>
         </ul>
     </div>
@@ -33,30 +36,55 @@
 
 <script>
 import avatarImg from '@/assets/image/amyimg/张碧晨.jpg';
+
 export default {
     data() {
         return {
             isLoggedIn: false,
+            isAdmin: false, // 管理员状态
             username: '',
-            avatarSrc: ''
+            avatarSrc: avatarImg,
+            showDropdown: false // 控制用户头像下拉菜单的显示状态
         };
     },
     mounted() {
-        // 从localStorage获取存储的用户信息
-        const storedUserInfosStr = localStorage.getItem('storedUserInfos');
-        if (storedUserInfosStr) {
-            const storedUserInfos = JSON.parse(storedUserInfosStr);
-            if (storedUserInfos.length > 0) {
-                // 取第一个用户信息
-                this.username = storedUserInfos[0].username;
-                // 直接使用导入的头像路径赋值给avatarSrc，使其能正确显示头像
-                this.avatarSrc = avatarImg;
+        this.checkUserStatus();
+    },
+    methods: {
+        checkUserStatus() {
+            const currentSessionStr = localStorage.getItem('currentSession');
+            if (currentSessionStr) {
+                const currentSession = JSON.parse(currentSessionStr);
+                this.username = currentSession.username;
                 this.isLoggedIn = true;
+                this.isAdmin = currentSession.isAdmin || false;
             }
+        },
+        logout() {
+            localStorage.removeItem('currentSession');
+            this.isLoggedIn = false;
+            this.isAdmin = false;
+            this.username = '';
+            this.avatarSrc = '';
+            window.location.reload(); // 强制刷新页面以确保状态同步
+        },
+        hideDropdown() {
+            this.showDropdown = false;
+        },
+        stopHideDropdown() {
+            // 阻止 hideDropdown 被触发
+        },
+        isActive(path) {
+            return this.$route.path === path;
         }
+    },
+    watch: {
+        // 监听路由变化，确保用户状态是最新的
+        '$route': 'checkUserStatus'
     }
 };
 </script>
+
 <style scoped>
 .navbar {
     font-size: 90%;
@@ -87,7 +115,7 @@ export default {
     align-items: center;
     padding: 0 10px;
     height: 70px;
-    position: relative; /* Ensure dropdown aligns with other items */
+    position: relative;
 }
 
 /* Hover effect for the regular menu items */
@@ -123,13 +151,13 @@ export default {
 
 /* 下拉菜单样式 */
 .nav-links .dropdown {
-    position: relative; /* Ensures dropdown aligns with other menu items */
+    position: relative;
 }
 
 .nav-links .dropdown-menu {
     display: none;
     position: absolute;
-    top: 70px; /* Ensures the menu appears directly below the navbar */
+    top: 70px;
     left: 0;
     background-color: #292828;
     list-style: none;
@@ -155,6 +183,42 @@ export default {
 
 /* Show dropdown menu on hover */
 .nav-links .dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.user-dropdown {
+    position: relative;
+}
+
+.user-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #292828;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.user-dropdown-menu li {
+    padding: 10px 15px;
+}
+
+.user-dropdown-menu li:hover {
+    background-color: #333;
+}
+
+.user-dropdown-menu a {
+    color: #b6b0b0;
+    text-decoration: none;
+}
+
+.user-dropdown:hover .user-dropdown-menu,
+.user-dropdown-menu:hover {
     display: block;
 }
 </style>

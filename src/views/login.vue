@@ -1,121 +1,79 @@
 <template>
-    <div class="by">
-        <div id="con">
-            <img id="tx" :src="avatarSrc" alt="用户头像">
-            <div id="left">
-                <h2>登录用户</h2>
-                <div id="time">{{ currentTime }}</div>
-            </div>
-            <div id="right">
-                <form @submit.prevent="login">
-                    <input type="text" v-model="loginUsername" placeholder="用户名" required autocomplete="username"><br><br>
-                    <input type="password" v-model="loginPassword" placeholder="密码" required autocomplete="current-password"><br><br>
-                    <input id="tj" type="submit" value="登录">
-                </form>
-                <div class="login-link"><br>
-                    <router-link class="aa" to="/register">没有帐户？立即注册</router-link>
-                </div>
-            </div>
+  <div class="by">
+    <div id="con">
+      <img id="tx" :src="avatarSrc" alt="用户头像">
+      <div id="left">
+        <h2>登录用户</h2>
+        <div id="time">{{ currentTime }}</div>
+      </div>
+      <div id="right">
+        <form @submit.prevent="login">
+          <input type="text" v-model="loginUsername" placeholder="用户名" required autocomplete="username"><br><br>
+          <input type="password" v-model="loginPassword" placeholder="密码" required autocomplete="current-password"><br><br>
+          <input id="tj" type="submit" value="登录">
+        </form>
+        <div class="login-link">
+          <router-link class="aa" to="/register">没有帐户？立即注册</router-link>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
 import avatarImg from '@/assets/image/amyimg/邓紫棋.jpg';
-import $ from 'jquery';
+import axios from 'axios';
 
 export default {
-    name: 'Login',
-    data() {
-        return {
-            currentTime: '',
-            loginUsername: '',
-            loginPassword: '',
-            avatarSrc: avatarImg
-        };
+  name: 'Login',
+  data() {
+    return {
+      currentTime: '',
+      loginUsername: '',
+      loginPassword: '',
+      avatarSrc: avatarImg,
+    };
+  },
+  mounted() {
+    this.updateTime();
+    setInterval(this.updateTime, 1000);
+  },
+  methods: {
+    updateTime() {
+      const now = new Date();
+      this.currentTime = now.toTimeString().slice(0, 8);
     },
-    mounted() {
-        this.updateTime();
-        setInterval(this.updateTime, 1000);
-
-        // 以下鼠标相关事件绑定与原注册功能类似，保持交互效果一致
-        $(document).on('mouseenter', 'input', (e) => {
-            $(e.currentTarget).css({
-                'transform': 'scale(1.1)',
-                'transition': 'all 0.3s ease'
-            });
-        }).on('mouseleave', 'input', (e) => {
-            $(e.currentTarget).css({
-                'transform': 'scale(1)',
-                'transition': 'all 0.3s ease'
-            });
+    async login() {
+      try {
+        const response = await axios.post('http://localhost:3000/api/login', {
+          username: this.loginUsername,
+          password: this.loginPassword
         });
 
-        $(document).on('mouseenter', 'a', (e) => {
-            $(e.currentTarget).addClass("underline");
-        }).on('mouseleave', 'a', (e) => {
-            $(e.currentTarget).removeClass("underline");
-        });
+        if (response.data.success) {
+          const userInfo = {
+            username: this.loginUsername,
+            sessionId: Date.now().toString(),
+            isAdmin: response.data.isAdmin,
+          };
 
-        $('#tx').click((e) => {
-            $(e.currentTarget).animate({
-                top: '-=20px'
-            }, 100).animate({
-                top: '+=40px'
-            }, 100).animate({
-                top: '-=20px'
-            }, 100).animate({
-                left: '-=20px'
-            }, 100).animate({
-                left: '+=40px'
-            }, 100).animate({
-                left: '-=20px'
-            }, 100);
-        });
-    },
-    methods: {
-        updateTime() {
-            const now = new Date();
-            const hours = now.getHours().toString().padStart(2, '0');
-            const minutes = now.getMinutes().toString().padStart(2, '0');
-            const seconds = now.getSeconds().toString().padStart(2, '0');
-            this.currentTime = `${hours}:${minutes}:${seconds}`;
-        },
-        login() {
-            // 从localStorage获取已注册用户信息
-            const registeredUserStr = localStorage.getItem('registeredUsers');
-            let registeredUsers = null;
-            if (registeredUserStr) {
-                registeredUsers = JSON.parse(registeredUserStr);
-            }
-            // 验证用户名和密码是否匹配
-            if (registeredUsers) {
-                const isMatch = registeredUsers.some(user => user.username === this.loginUsername && user.password === this.loginPassword);
-                if (isMatch) {
-                    // 以下是新增的存储用户信息到localStorage的代码部分
-                    const userInfo = {
-                        username: this.loginUsername
-                        // 这里可以按需添加更多要存储的用户信息字段，比如用户ID等
-                    };
-                    // 先从localStorage获取已有的存储用户信息的数组（如果不存在则初始化为空数组）
-                    const storedUserInfosStr = localStorage.getItem('storedUserInfos');
-                    let storedUserInfos = [];
-                    if (storedUserInfosStr) {
-                        storedUserInfos = JSON.parse(storedUserInfosStr);
-                    }
-                    // 将当前登录成功的用户信息添加到数组中
-                    storedUserInfos.push(userInfo);
-                    // 再将更新后的数组存回localStorage，记得转换为JSON字符串格式
-                    localStorage.setItem('storedUserInfos', JSON.stringify(storedUserInfos));
+          localStorage.setItem('currentSession', JSON.stringify(userInfo));
 
-                    alert('登录成功');
-                    this.$router.push('/');
-                    return;
-                }
-            }
-            alert('用户名或密码错误，请重新输入');
+          if (response.data.isAdmin) {
+            this.$router.push('/admin');
+            alert('管理员登录成功');
+          } else {
+            this.$router.push('/');
+            alert('登录成功');
+          }
+        } else {
+          alert('用户名或密码错误，请重新输入');
         }
+      } catch (error) {
+        alert(error.response?.data?.message || '登录失败，请稍后再试');
+      }
     }
+  }
 };
 </script>
 

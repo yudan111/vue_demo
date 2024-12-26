@@ -8,7 +8,7 @@ import login from '@/views/login.vue'
 import register from '@/views//register.vue'
 import follow from '@/views/follow.vue'
 import downloadclient from '../views/downloadclient.vue'
-import creatorcenter from '../views/creatorcenter.vue'
+import AdminPanel from '../views/AdminPanel.vue'
 import musician from '../views/musician.vue'
 import djgd from '@/components/djgd.vue'
 import yygd from '@/components/yygd.vue'
@@ -25,7 +25,7 @@ const routes = [
   { path: '/register', component: register },
   { path: '/follow', component: follow },
   { path: '/downloadclient', component: downloadclient },
-  { path: '/creatorcenter', component: creatorcenter },
+  { path: '/admin', component: AdminPanel },
   { path: '/musician', component: musician },
   { path: '/djgd', component: djgd },
   { path: '/yygd', component: yygd },

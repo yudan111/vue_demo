@@ -22,7 +22,7 @@
 
 <script>
 import avatarImg from '@/assets/image/amyimg/邓紫棋.jpg';
-import $ from 'jquery';
+import axios from 'axios'; // 引入 axios
 
 export default {
     name: 'Register',
@@ -37,43 +37,6 @@ export default {
     mounted() {
         this.updateTime();
         setInterval(this.updateTime, 1000);
-
-        // 绑定鼠标进入和离开input元素的事件
-        $(document).on('mouseenter', 'input', (e) => {
-            $(e.currentTarget).css({
-                'transform': 'scale(1.1)',
-                'transition': 'all 0.3s ease'
-            });
-        }).on('mouseleave', 'input', (e) => {
-            $(e.currentTarget).css({
-                'transform': 'scale(1)',
-                'transition': 'all 0.3s ease'
-            });
-        });
-
-        // 绑定鼠标进入和离开a元素的事件
-        $(document).on('mouseenter', 'a', (e) => {
-            $(e.currentTarget).addClass("underline");
-        }).on('mouseleave', 'a', (e) => {
-            $(e.currentTarget).removeClass("underline");
-        });
-
-        // 绑定头像点击事件
-        $('#tx').click((e) => {
-            $(e.currentTarget).animate({
-                top: '-=20px'
-            }, 100).animate({
-                top: '+=40px'
-            }, 100).animate({
-                top: '-=20px'
-            }, 100).animate({
-                left: '-=20px'
-            }, 100).animate({
-                left: '+=40px'
-            }, 100).animate({
-                left: '-=20px'
-            }, 100);
-        });
     },
     methods: {
         updateTime() {
@@ -83,33 +46,32 @@ export default {
             const seconds = now.getSeconds().toString().padStart(2, '0');
             this.currentTime = `${hours}:${minutes}:${seconds}`;
         },
-        register() {
-            // 获取已注册用户信息（如果有的话），并解析为数组格式
-            const registeredUserStr = localStorage.getItem('registeredUsers');
-            let registeredUsers = [];
-            if (registeredUserStr) {
-                registeredUsers = JSON.parse(registeredUserStr);
+        async register() {
+            try {
+                // 验证用户名和密码是否为空
+                if (!this.username || !this.password) {
+                    alert('用户名和密码不能为空');
+                    return;
+                }
+
+                // 发送请求给后端API进行用户注册
+                await axios.post('http://localhost:3000/api/register', {
+                    username: this.username,
+                    password: this.password
+                });
+
+                alert('注册成功');
+                // 注册成功后跳转到登录页面
+                this.$router.push('/login');
+            } catch (error) {
+                if (error.response) {
+                    // 如果有响应，则显示从服务器返回的消息
+                    alert(error.response.data.message);
+                } else {
+                    // 对于网络错误等没有响应的情况
+                    alert('注册失败，请稍后再试');
+                }
             }
-            // 验证用户名是否已存在时，遍历数组进行判断
-            const isUsernameExist = registeredUsers.some(user => user.username === this.username);
-            if (isUsernameExist) {
-                alert('注册失败，该用户名已被注册');
-                return;
-            }
-            // 简单验证，验证用户名和密码是否为空
-            if (!this.username ||!this.password) {
-                alert('用户名和密码不能为空');
-                return;
-            }
-            // 注册成功后，将新用户信息添加到数组中再存储回localStorage
-            registeredUsers.push({
-                username: this.username,
-                password: this.password
-            });
-            localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
-            alert('注册成功');
-            // 进行页面跳转
-            this.$router.push('/login');
         }
     }
 };
